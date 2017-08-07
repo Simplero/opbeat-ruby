@@ -34,7 +34,7 @@ module Opbeat
         begin
           body = JSON.dump(body)
         rescue => e
-          body = "Error saving body: #{e}"
+          body = JSON.dump("error" => "Error JSON-dumping body: #{e}")
         end
       end
 
