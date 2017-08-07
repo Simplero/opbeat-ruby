@@ -30,7 +30,12 @@ module Opbeat
       end
 
       if body.is_a?(Hash) || body.is_a?(Array)
-        body = JSON.dump(body)
+        # CALVIN: Don't fail on this
+        begin
+          body = JSON.dump(body)
+        rescue => e
+          body = "Error saving body: #{e}"
+        end
       end
 
       request = adapter.post path do |req|
